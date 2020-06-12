@@ -38,13 +38,11 @@ def expected_distance(n,steps):
     distance = []
     for i in range(n):
         randomwalk = random_walk(steps,0)
-       # print(randomwalk)
         walks.append(randomwalk[0])
         distance.append(randomwalk[1])
     distance_length = sum(distance)/(n)
     #plt.plot(walks) 
     #plt.show()
-    #print(distance_length)
     return distance_length
 #expected_distance(1000,100)
 
@@ -76,7 +74,6 @@ def two_walks(difference):
             time+=1
             x-=1
             distance = math.sqrt((y-x)*(y-x))
-            #print(distance)
         elif stepy ==['right']:
             time +=1
             y+=1
@@ -101,13 +98,10 @@ def expected_time(n,difference):
     distance = []
     n1 =[]
     for i in range(n):
-        #print(i)
         randomwalk = two_walks(difference)
-       # print(randomwalk)
         walks.append(randomwalk)
 
     time_length = (sum(walks)/2)/n
-    print(time_length)
     return time_length
     
 #expected_time(1000,50)
@@ -128,11 +122,10 @@ def frequentist2(n,difference):
 #frequentist2(1000,50)        
 
 #---------task 03----------------------
-def inside_circle(x,y,theta,centerx,centery):
+def inside_circle(x,y,theta,centerx,centery):           #tangential reflection
     radius = 100
     tempx = (radius - 0.5)*math.cos(theta)
     tempy = (radius - 0.5)*math.sin(theta)
-            #plt.plot(x,y)
     a = (tempx - x)**2 + (tempy -y)**2
     b = 2*(tempx - x)*(x-centerx)+2*(tempy - y)*(y- centery)
     c = (x - centerx)**2 + (y- centery)**2 - radius**2
@@ -223,7 +216,6 @@ def expected_distance1(n,steps):
     distance_length = sum(distance)/(n)
     #plt.plot(walks) 
     #plt.show()
-    #print(distance_length)
     return distance_length
 #expected_distance(1000,100)
 
@@ -262,11 +254,8 @@ def circular_walk(n):
     i = 0
     counter = 0
     while (i < n):
-        print(i)
-        #step = random.choices([0,0.5,1],[0.33,0.33,0.33])
         step = random.uniform(0,1)
         theta = 2.*math.pi*random.uniform(0,1)
-        #theta = random.choices([((0*math.pi)/180),((60*math.pi)/180),((120*math.pi)/180),((180*math.pi)/180),((240*math.pi)/180),((300*math.pi)/180),((360*math.pi)/180)])
         tempx = step*math.cos(theta)
         tempy = step*math.sin(theta)
         tempd = math.sqrt((x*x +y*y))
@@ -286,7 +275,6 @@ def circular_walk(n):
         i+=1
  
     plt.plot(randomwalkx,randomwalky)
-    #plt.plot(newx1,newy1)
     plt.xlabel("X");
     plt.ylabel("Y")
     plt.title("Circular Continuous Random Walk of 20000 steps")
@@ -334,8 +322,7 @@ def circular_walk3(n):
             randomwalky.append(y)
             plt.scatter(x,y)
         i+=1
-
-    print(counter)   
+   
     plt.plot(randomwalkx,randomwalky)
     #plt.plot(newx1,newy1)
     plt.xlabel("X");
@@ -367,7 +354,6 @@ def circular_two_walk(centerx, centery):
     distance = math.sqrt((x2-x1)**2 + (y2-y1)**2)
     count = 0
     while (distance >= 1):
-        #print(distance)
         step = random.random()
         theta = 2.*math.pi*random.random()
         tempx = step*math.cos(theta)
@@ -424,10 +410,6 @@ def circular_two_walk(centerx, centery):
             distance = math.sqrt((x2-x1)**2 + (y2-y1)**2)
             
             
-            
-             
-      
-   # print(count)
 ##    plt.plot(randomwalkx1,randomwalky1)
 ##    plt.plot(randomwalkx2,randomwalky2)
 ##    plt.show()
@@ -440,7 +422,7 @@ def expected_steps(n):
     distance = []
     n1 =[]
     for i in range(n):
-        print (i)
+        #print (i)
         walks.append(circular_two_walk(0,0))
 
     step_length = sum(walks)/n
@@ -450,17 +432,19 @@ def expected_steps(n):
 
 def deviation():    
     a = []
-    for i in range(20):
+    for i in range(50):
         a.append(expected_steps(50)[1])
-    dev = sum(a)/20
-    #print(dev)
+    dev = sum(a)/50
+    return dev
 
-    
+#print(deviation())
 
 def frequentist4(n):
     steps = []
     for i in range(n):
-        steps.append(expected_steps(550))
+        print(i)
+        steps.append(expected_steps(550)[0])
+       
 
     plt.hist(steps)
     plt.xlabel("Expected number of steps");
