@@ -124,19 +124,19 @@ def frequentist2(n,difference):
 #---------task 03----------------------
 def inside_circle(x,y,theta,centerx,centery):           #tangential reflection
     radius = 100
-    tempx = (radius - 0.5)*math.cos(theta)
+    tempx = (radius - 0.5)*math.cos(theta)         #point just inside the boundary
     tempy = (radius - 0.5)*math.sin(theta)
     a = (tempx - x)**2 + (tempy -y)**2
     b = 2*(tempx - x)*(x-centerx)+2*(tempy - y)*(y- centery)
     c = (x - centerx)**2 + (y- centery)**2 - radius**2
     step = (2*c)/(-b +math.sqrt((b*b)-4*a*c))
-    intersectx = (tempx - x)*step + x
+    intersectx = (tempx - x)*step + x               #points of intersection of the line with the circle boundary
     intersecty = (tempy - y)*step + y
-    m = -1/((intersecty - centery)/(intersectx - centerx))
+    m = -1/((intersecty - centery)/(intersectx - centerx))    #slope of the tangent
     b1 = intersecty - m*intersectx
     d = (x+(y-b1)*m)/(1+m*m)
     newx = 2*d -x
-    newy = 2*d*m - y +2*b1
+    newy = 2*d*m - y +2*b1        #new points inside the circle after reflection
 
     return newx , newy
 
@@ -422,7 +422,6 @@ def expected_steps(n):
     distance = []
     n1 =[]
     for i in range(n):
-        #print (i)
         walks.append(circular_two_walk(0,0))
 
     step_length = sum(walks)/n
@@ -442,7 +441,6 @@ def deviation():
 def frequentist4(n):
     steps = []
     for i in range(n):
-        print(i)
         steps.append(expected_steps(550)[0])
        
 
